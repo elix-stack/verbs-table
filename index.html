@@ -1,283 +1,332 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Verbs Table | Elix</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verbs Table | Elix</title>
+    <style>
+      :root {
+        --primary-bg: #f5f5dc;
+        --primary-text: #333;
+        --accent: #d2b48c;
+        --header-bg: #8b4513;
+        --header-text: white;
+      }
 
-  <style>
-    /* ========== RESET & GLOBAL STYLE ========== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+      body.dark-mode {
+        --primary-bg: #2c2c2c;
+        --primary-text: #f0f0f0;
+        --accent: #5c4433;
+        --header-bg: #1a1a1a;
+        --header-text: #f5f5dc;
+      }
 
-    body {
-      padding-top: 80px;   /* Jarak dari atas untuk navbar */
-      padding-bottom: 60px; /* Jarak dari bawah untuk footer */
-    }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
 
-    /* ========== NAVBAR ========== */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: lightskyblue;
-      border-bottom: 2px solid #333;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      z-index: 999;
-    }
+      body {
+        background-color: var(--primary-bg);
+        color: var(--primary-text);
+        padding-top: 90px;
+        padding-bottom: 60px;
+        transition: background-color 0.3s, color 0.3s;
+      }
 
-    .navbar h1 {
-      font-size: 24px;
-      margin-left: 10px;
-    }
-
-    .search-container {
-      display: flex;
-      gap: 10px;
-    }
-
-    .search-container input {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      width: 250px;
-    }
-
-    .search-container button {
-      padding: 8px 12px;
-      background-color: gainsboro;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: transform 0.1s ease;
-    }
-
-    .search-container button:hover {
-      transform: scale(1.05);
-    }
-
-    /* ========== TABEL ========== */
-    table {
-      width: 90%;
-      border-collapse: collapse;
-      table-layout: fixed;
-      margin: auto;
-    }
-
-    thead th {
-      background-color: lightskyblue;
-      top: 80px; /* mengikuti tinggi navbar */
-    }
-
-    tbody {
-      text-align: center;
-    }
-
-    th, td {
-      border: 1px solid #333;
-      padding: 8px;
-    }
-    @media (max-width: 768px) {
-      .navbar h1 {
-        font-size: 20px;
-    }
-    .search-container input {
-        width: 200px;
-    }
-        td {
-    font-size: 14px; /* Lebih kecil untuk HP */
-  }
-}
-    @media (max-width: 576px) {
-      .navbar h1 {
-        font-size: 20px;
-    }
-    .search-container input {
-        width: 200px;
-    }
-        td {
-    font-size: 12px; /* Lebih kecil untuk HP */
-  }
-}
-
-    /* ========== HIGHLIGHT HASIL PENCARIAN ========== */
-    .highlight {
-      background-color: yellow;
-      font-weight: bold;
-      padding: 2px;
-      border-radius: 3px;
-    }
-
-    /* ========== FOOTER ========== */
-    footer {
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--accent);
+        border-bottom: 2px solid var(--header-bg);
         display: flex;
-        align-items: center;         /* Vertikal center */
-        justify-content: center;     /* Horizontal center */
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        z-index: 999;
+        transition: background-color 0.3s;
+      }
+
+      .navbar h1 {
+        font-size: 24px;
+        margin-left: 10px;
+        color: var(--header-text);
+      }
+
+      .search-container {
+        display: flex;
+        gap: 10px;
+      }
+
+      .search-container input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 250px;
+      }
+
+      .search-container button {
+        padding: 8px 12px;
+        background-color: #eee;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.1s ease;
+      }
+
+      .search-container button:hover {
+        transform: scale(1.05);
+      }
+
+      .dark-mode-toggle {
+        background-color: var(--header-bg);
+        color: var(--header-text);
+        padding: 6px 12px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        margin-left: 10px;
+      }
+
+      table {
+        width: 90%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        margin: auto;
+      }
+
+      thead th {
+        background-color: var(--header-bg);
+        color: var(--header-text);
+        top: 90px;
+      }
+
+      tbody {
+        text-align: center;
+      }
+
+      th,
+      td {
+        border: 1px solid var(--primary-text);
+        padding: 8px;
+      }
+
+      .highlight {
+        background-color: yellow;
+        font-weight: bold;
+        padding: 2px;
+        border-radius: 3px;
+      }
+
+      footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         gap: 10px;
         position: fixed;
         bottom: 0;
         margin: auto;
         width: 100%;
-        background-color: rgb(67, 189, 230);
-        color: lightcyan;
+        background-color: var(--accent);
+        color: var(--header-text);
         text-align: center;
         padding: 10px;
         font-size: 0.9em;
         z-index: 999;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      #backToTop {
+        margin-top: 5px;
+        padding: 5px 10px;
+        font-size: 0.9em;
+        background-color: #fff;
+        color: #0077aa;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+
+      #backToTop:hover {
+        background-color: #eee;
+        transform: scale(1.05);
+      }
+
+      .navbar a {
+        text-decoration: none;
+        color: var(--header-text);
+        font-size: 12px;
+        transition: transform 0.3s;
+      }
+
+      .navbar a:hover {
+        color: gray;
+        transform: scale(1.05);
+      }
+
+      /* ========== MEDIA QUERIES ========== */
+      @media (max-width: 1200px) {
+        .search-container input {
+          width: 220px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .navbar h1 {
+          font-size: 20px;
         }
 
-
-    #backToTop {
-      margin-top: 5px;
-      padding: 5px 10px;
-      font-size: 0.9em;
-      background-color: #fff;
-      color: #0077aa;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-
-    #backToTop:hover {
-      background-color: #eee;
-      transform: scale(1.05);
-    }
-    .navbar a {
-            text-decoration: none;
-            color: inherit;
-            font-size: 12px;
-            transition: transform 0.3s;
+        .search-container input {
+          width: 180px;
         }
-        .navbar a:hover {
-            color: gray;
-            transform: scale(1.05);
-        }
-  </style>
-</head>
 
-<body>
-  <!-- ========== NAVBAR ========== -->
-  <div class="navbar">
-    <h1>Verbs Table</h1>
-    <div class="search-container">
-      <input type="text" id="searchInput" placeholder="Search..." autocomplete="off">
-      <button type="button" id="searchButton">Search</button>
+        td {
+          font-size: 14px;
+        }
+
+        .dark-mode-toggle {
+          font-size: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .navbar {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .search-container {
+          flex-direction: column;
+          align-items: stretch;
+          width: 100%;
+        }
+
+        .search-container input,
+        .search-container button {
+          width: 100%;
+        }
+
+        td {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ========== NAVBAR ========== -->
+    <div class="navbar">
+      <h1>Verbs Table</h1>
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search..." autocomplete="off" />
+        <button type="button" id="searchButton">Search</button>
+      </div>
+      <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌓 Mode</button>
+      <p><a href="../contactForm/contactForm.html" target="_blank">contact</a></p>
     </div>
-    <p><a href="../contactForm/contactForm.html" target="_blank">contact</a></p>
-  </div>
 
-  <!-- ========== TABEL ========== -->
-  <table>
-    <thead>
-      <tr>
-        <th>Base Form</th>
-        <th>Present Participle</th>
-        <th>Past Form</th>
-        <th>Past Participle</th>
-        <th>Verb Type</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody">
-      <!-- Data akan diisi oleh JavaScript -->
-    </tbody>
-  </table>
+    <!-- ========== TABEL ========== -->
+    <table>
+      <thead>
+        <tr>
+          <th>Base Form</th>
+          <th>Present Participle</th>
+          <th>Past Form</th>
+          <th>Past Participle</th>
+          <th>Verb Type</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
 
-  <!-- ========== FOOTER ========== -->
-  <footer>
-    <p>&copy; 2025 Muhammad Ali Yusuf | All Rights Reserved</p>
-    <button id="backToTop">↑ Top</button>
-  </footer>
+    <!-- ========== FOOTER ========== -->
+    <footer>
+      <p>&copy; 2025 Muhammad Ali Yusuf | All Rights Reserved</p>
+      <button id="backToTop">↑ Top</button>
+    </footer>
 
-  <!-- ========== SCRIPT ========== -->
-  <script>
-    // Saat dokumen siap, ambil data dari Google Sheet
-    document.addEventListener("DOMContentLoaded", function () {
-      const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLAjbpk8CcqEVSAD_4o9ptAIptwvHTQB_4EyduHYxt42fxcJFipKCFWU_YFvNjLqeksHcx2GZjdQXf/pub?output=csv";
-      fetchData(sheetURL);
-    });
+    <!-- ========== SCRIPT ========== -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTLAjbpk8CcqEVSAD_4o9ptAIptwvHTQB_4EyduHYxt42fxcJFipKCFWU_YFvNjLqeksHcx2GZjdQXf/pub?output=csv';
+        fetchData(sheetURL);
+      });
 
-    // Mengambil data CSV dari Google Sheets
-    function fetchData(sheetURL) {
-      fetch(sheetURL)
-        .then(response => response.text())
-        .then(data => populateTable(data))
-        .catch(error => console.error("Gagal mengambil data:", error));
-    }
+      function fetchData(sheetURL) {
+        fetch(sheetURL)
+          .then((response) => response.text())
+          .then((data) => populateTable(data))
+          .catch((error) => console.error('Gagal mengambil data:', error));
+      }
 
-    // Mengisi tabel dengan data yang diambil
-    function populateTable(data) {
-      const tableBody = document.getElementById("tableBody");
-      tableBody.innerHTML = "";
+      function populateTable(data) {
+        const tableBody = document.getElementById('tableBody');
+        tableBody.innerHTML = '';
 
-      const rows = data.split("\n").slice(1); // Lewati header
-      rows.forEach(row => {
-        const columns = row.split(",");
-        const newRow = document.createElement("tr");
+        const rows = data.split('\n').slice(1);
+        rows.forEach((row) => {
+          const columns = row.split(',');
+          const newRow = document.createElement('tr');
 
-        columns.forEach(column => {
-          const cell = document.createElement("td");
-          cell.textContent = column.trim();
-          newRow.appendChild(cell);
+          columns.forEach((column) => {
+            const cell = document.createElement('td');
+            cell.textContent = column.trim();
+            newRow.appendChild(cell);
+          });
+
+          tableBody.appendChild(newRow);
+        });
+      }
+
+      function searchTable() {
+        const searchValue = document.getElementById('searchInput').value.toLowerCase().trim();
+        const tableBody = document.getElementById('tableBody');
+        const rows = Array.from(tableBody.querySelectorAll('tr'));
+        let found = false;
+
+        rows.forEach((row) => {
+          let cells = row.getElementsByTagName('td');
+          let match = false;
+
+          for (let cell of cells) {
+            let words = cell.textContent.split(' ');
+            let newText = words
+              .map((word) => {
+                if (word.toLowerCase() === searchValue) {
+                  match = true;
+                  return `<span class="highlight">${word}</span>`;
+                }
+                return word;
+              })
+              .join(' ');
+            cell.innerHTML = newText;
+          }
+
+          if (match && !found) {
+            row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            found = true;
+          }
         });
 
-        tableBody.appendChild(newRow);
-      });
-    }
-
-    // Fungsi pencarian dan scroll otomatis ke hasil
-    function searchTable() {
-      const searchValue = document.getElementById("searchInput").value.toLowerCase().trim();
-      const tableBody = document.getElementById("tableBody");
-      const rows = Array.from(tableBody.querySelectorAll("tr"));
-
-      let found = false;
-
-      rows.forEach(row => {
-        let cells = row.getElementsByTagName("td");
-        let match = false;
-
-        // Highlight jika ada kecocokan
-        for (let cell of cells) {
-          let words = cell.textContent.split(" ");
-          let newText = words.map(word => {
-            if (word.toLowerCase() === searchValue) {
-              match = true;
-              return `<span class="highlight">${word}</span>`;
-            }
-            return word;
-          }).join(" ");
-
-          cell.innerHTML = newText;
+        if (!found) {
+          alert(`Kata "${searchValue}" tidak ditemukan dalam daftar.`);
         }
-
-        // Scroll ke hasil pertama yang cocok
-        if (match && !found) {
-          row.scrollIntoView({ behavior: "smooth", block: "center" });
-          found = true;
-        }
-      });
-
-      if (!found) {
-        alert(`Kata "${searchValue}" tidak ditemukan dalam daftar.`);
       }
-    }
 
-    // Tombol pencarian diklik
-    document.getElementById("searchButton").addEventListener("click", searchTable);
+      document.getElementById('searchButton').addEventListener('click', searchTable);
 
-    // Tombol untuk kembali ke atas
-    document.getElementById("backToTop").addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  </script>
-</body>
+      document.getElementById('backToTop').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+      }
+    </script>
+  </body>
 </html>
