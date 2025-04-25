@@ -26,3 +26,7 @@ This project aims to provide English learners with a helpful and accessible tool
 ## 📬 Contact
 
 For feedback, questions, or suggestions, feel free to reach out via the [contact form](https://elix-stack.github.io/elix-showcase/projects/contactForm/contactForm.html).
+
+## 📝 License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). You are free to use, modify, and distribute the code as long as you provide proper attribution to the original author.
